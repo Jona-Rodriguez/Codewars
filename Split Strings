@@ -1,0 +1,15 @@
+function solution(str){
+   let newArr = []
+   
+  // for the length of the string
+  for(let i = 0; i < str.length; i += 2){
+     if(i + 1 < str.length){
+       // If index is an even number append the 2 letters
+       newArr.push(str.slice(i,i+2));
+       }else{
+         // if last is not even
+         newArr.push(str[i] + '_');
+      }
+    }
+  return newArr;
+}
