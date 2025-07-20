@@ -1,0 +1,47 @@
+function solution(roman) {
+  let total = 0;
+
+  let numberConverter = function(letter) {
+    switch(letter) {
+      case 'I': 
+        return 1;
+        break;
+      case 'V': 
+        return 5;
+        break;
+      case 'X': 
+        return 10;
+        break;
+      case 'L': 
+        return 50;
+        break;
+      case 'C': 
+        return 100;
+        break;
+      case 'D': 
+        return 500;
+        break;
+      case 'M': 
+        return 1000;
+        break;
+      default:
+        console.log('Not a roman numeral.');
+        return 0;
+        break;
+    }
+  };
+
+  for (let i = 0; i < roman.length; i++) {
+    let curr = numberConverter(roman.charAt(i));
+    let next = numberConverter(roman.charAt(i + 1));
+
+    if (curr < next) {
+      total += next - curr;
+      i++;
+    } else {
+      total += curr;
+    }
+  }
+
+  return total;
+}
