@@ -1,0 +1,15 @@
+function missingWord(nums, str) {
+  let secretWord = '';
+  let oneWord = str.split(" ").join("");
+  let myArr = nums;
+  
+  myArr.sort((a,b) => a - b);
+  myArr.forEach(index =>{
+    if(oneWord[index]){
+      secretWord += oneWord[index].toLowerCase();
+    }else{
+      secretWord = "No mission today";
+    }
+  });
+  return secretWord;
+}
