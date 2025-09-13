@@ -1,29 +1,30 @@
 function getLimitBreaches(timestamps, userIds, actions, m) {
     const sessions = {};   // user -> active session count
-    const breached = new Set();
+    const breached = new Set(); // a set is an array-like structure for unique values
 
-    for (let i = 0; i < timestamps.length; i++) {
-        const user = userIds[i];
-        const action = actions[i];
+    // for each timestamp
+    for (let i = 0; i < timestamps.length; i++) { // for each timestamp
+        const user = userIds[i]; // get user at timestamp
+        const action = actions[i]; // get their action at timestamp
 
-        if (!(user in sessions)) {
-            sessions[user] = 0;
+        if (!(user in sessions)) { // if not initialized in the sessions
+            sessions[user] = 0; // give them 0
         }
 
-        if (action === "login") {
+        if (action === "login") { // login + 1
             sessions[user] += 1;
-            if (sessions[user] > m) {
-                breached.add(user);
+            if (sessions[user] > m) { // if they pass the limit m
+                breached.add(user); // add them to the unique set
             }
-        } else if (action === "logout") {
-            if (sessions[user] > 0) {
-                sessions[user] -= 1;
+        } else if (action === "logout") { // if they logged out - 1
+            if (sessions[user] > 0) { // make sure they aren't below 0
+                sessions[user] -= 1; // login - 1
             }
         }
     }
-
+    
     // Return lexicographically sorted array (empty if no breaches)
-    return Array.from(breached).sort();
+    return Array.from(breached).sort(); // turn the set into an array and apply the array sort method for lexicographic sorted order of the unique ids
 }
 
 // -------------------- TEST CASES --------------------
